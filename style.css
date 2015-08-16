@@ -46,12 +46,14 @@ a:visited{
 	left:0px;
 	right:0px;
 	height:100px;
-	border-bottom:1px solid #ccc;
+	border:none;
 	height:100px;
 	background-color:#0080ff;
 	padding:10px;
 	color:#fff;
 	text-align:center;
+	z-index:10;
+	box-shadow:0px 0px 3px rgba(0,0,0,0.5);
 }
 #header img{
 	max-width:80%;
