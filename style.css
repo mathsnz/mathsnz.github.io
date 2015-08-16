@@ -22,6 +22,17 @@ h3 {
 	font-weight: 500;
 	line-height: 15.3999996185303px;
 }
+a{
+	color:#0080ff;
+}
+a:visited{
+	color:#005cb8;
+}
+#content {
+    background: #FFFFFF;
+    margin: 0 auto;
+    max-width: 1008px;
+}
 #left{
 	position:fixed;
 	top:50px;
@@ -37,7 +48,7 @@ h3 {
 	height:100px;
 	border-bottom:1px solid #ccc;
 	height:100px;
-	background-color:#0cf;
+	background-color:#0080ff;
 	padding:10px;
 	color:#fff;
 	text-align:center;
