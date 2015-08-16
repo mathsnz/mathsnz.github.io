@@ -112,7 +112,20 @@ td{
 	padding:5px;
 	vertical-align:top;
 }
-td img{
+.sections {
+	text-align:center;
+}
+.sections > * {
+    vertical-align: top;
+}
+.sections div{
+	display:inline-block;
+	width:24%;
+	text-align:left;
+	float:top;
+	padding:3px;
+}
+.sections img{
 	max-width:100%;
 	max-height:100%;
     display: block;
@@ -168,6 +181,10 @@ td img{
 		right:0px;
 		bottom:auto;
 		left:auto;
+	}
+	.sections div{
+		display:block;
+		width:100%;
 	}
 	.callout {
 		position: relative;
