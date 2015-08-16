@@ -20,4 +20,6 @@ function init() {
     });
 }
 window.onload = init();
-$(window).resize(function(){ $.css("display", "");}); 
+$(document).ready(function() {
+	$(window).resize(function(){ $('#nav2').css("display", "none");}); 
+ });
