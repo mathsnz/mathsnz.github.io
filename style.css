@@ -106,7 +106,6 @@ a:visited{
 }
 table {
 	border-collapse:collapse;
-	table-layout:fixed;
 }
 td{
 	font-size: 14px;	
@@ -136,6 +135,10 @@ td{
 }
 #header a:hover{
 	text-decoration:underline;
+}
+ul {
+	margin-top:0px;
+	margin-bottom:0px;
 }
 
 @media all and (max-width: 660px) {
