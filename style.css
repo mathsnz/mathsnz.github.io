@@ -113,6 +113,10 @@ td{
 	padding:5px;
 	vertical-align:top;
 }
+tr{
+	border-bottom:1px solid #ddd;
+	border-top:1px solid #ddd;
+}
 .sections {
 	text-align:center;
 }
