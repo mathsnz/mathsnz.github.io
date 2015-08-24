@@ -159,6 +159,7 @@ ul {
 	}
 	#header {
 		text-align:center;
+		max-height:70px;
 	}
 	#header img{
 		max-height:100%;
