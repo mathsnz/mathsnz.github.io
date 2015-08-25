@@ -17,7 +17,7 @@ function init() {
             $("#nav").css( "text-align", "right" );
             $("#header img").css( "max-height", maxheight+"px" );
 		} else {
-            $("#header img").css( "float", "initial" );
+            $("#header img").css( "float", "none" );
             $("#nav").css( "text-align", "center" );
             $("#header img").css( "max-height", imgheight+"px" );
 		}
