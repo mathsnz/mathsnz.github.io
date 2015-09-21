@@ -23,14 +23,38 @@
 		table {
 			width:100%;
 		}
-		tr.click {
+		div.click {
 			cursor:pointer;
-			border-bottom:1px solid #ddd;
+			border:1px solid #ddd;
+			display:inline-block;
+			width:190px;
+			height:170px;
+			padding:10px;
+			margin:5px;
+			vertical-align: top
 		}
-		tr.bold {
-			font-weight:bold;
+		div.click div{
+			display:block;
+			width:100%;
+			padding-bottom:5px;
 		}
-		tr.border{
+		div.click div:first-child, div.click div:nth-child(2){
+			display:inline;
+			width:auto;
+			font-size:200%;
+			padding-bottom:5px;
+		}
+		div.click div:nth-child(1){
+			float:right;
+		}
+		div.click div:nth-child(3){
+			padding-top:20px;
+		}
+		div.bold {
+			background-color:#cde6ff;
+			color:#000;
+		}
+		div.border{
 			border-top:none;
 		}
 	</style>
@@ -38,57 +62,55 @@
 <body>
 <div id=content>
 	The standards in bold have MathsNZ resources, the other standards just have links to the appropriate places on the NZQA and TKI websites.
-	<table>
-	<tr class=border><td colspan=5><h1>Level 3</h1></tr>
-	<tr class="click" onclick='document.location="91573.html"'><td>91573</td><td>3.1</td><td>Apply the geometry of conic sections in solving problems</td><td>4 Credits</td><td>Internal</td></tr>
-	<tr class="click bold" onclick='document.location="91574.html"'><td>91574</td><td>3.2</td><td>Apply linear programming methods in solving problems</td><td>3 Credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91575.html"'><td>91575</td><td>3.3</td><td>Apply trigonometric methods in solving problems</td><td>3 Credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91576.html"'><td>91576</td><td>3.4</td><td>Use critical path analysis in solving problems</td><td>2 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91577.html"'><td>91577</td><td>3.5</td><td>Apply the algebra of complex numbers in solving problems</td><td>5 credits</td><td>External</td></tr>
-	<tr class="click" onclick='document.location="91578.html"'><td>91578</td><td>3.6</td><td>Apply differentiation methods in solving problems</td><td>6 credits</td><td>External</td></tr>
-	<tr class="click" onclick='document.location="91579.html"'><td>91579</td><td>3.7</td><td>Apply integration methods in solving problems</td><td>6 credits</td><td>External</td></tr>
-	<tr class="click bold" onclick='document.location="91580.html"'><td>91580</td><td>3.8</td><td>Investigate time series data</td><td>4 credits</td><td>Internal</td></tr>
-	<tr class="click bold" onclick='document.location="91581.html"'><td>91581</td><td>3.9</td><td>Investigate bivariate measurement data</td><td>4 credits</td><td>Internal</td></tr>
-	<tr class="click bold" onclick='document.location="91582.html"'><td>91582</td><td>3.10</td><td>Use statistical methods to make a formal inference</td><td>4 credits</td><td>Internal</td></tr>
-	<tr class="click bold" onclick='document.location="91583.html"'><td>91583</td><td>3.11</td><td>Conduct an experiment to investigate a situation using experimental design principles</td><td>4 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91584.html"'><td>91584</td><td>3.12</td><td>Evaluate statistically based reports</td><td>4 credits</td><td>External</td></tr>
-	<tr class="click" onclick='document.location="91585.html"'><td>91585</td><td>3.13</td><td>Apply probability concepts in solving problems</td><td>4 credits</td><td>External</td></tr>
-	<tr class="click bold" onclick='document.location="91586.html"'><td>91586</td><td>3.14</td><td>Apply probability distributions in solving problems</td><td>4 credits</td><td>External</td></tr>
-	<tr class="click bold" onclick='document.location="91587.html"'><td>91587</td><td>3.15</td><td>Apply systems of simultaneous equations in solving problems</td><td>3 credits</td><td>Internal</td></tr>
 
-	<tr class=border><td colspan=5><h1>Level 2</h1></tr>
-	<tr class="click" onclick='document.location="91256.html"'><td>91256</td><td>2.1</td><td>Apply co-ordinate geometry methods in solving problems</td><td>2 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91257.html"'><td>91257</td><td>2.2</td><td>Apply graphical methods in solving problems</td><td>4 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91258.html"'><td>91258</td><td>2.3</td><td>Apply sequences and series in solving problems</td><td>2 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91259.html"'><td>91259</td><td>2.4</td><td>Apply trigonometric relationships in solving problems</td><td>3 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91260.html"'><td>91260</td><td>2.5</td><td>Apply network methods in solving problems</td><td>2 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91261.html"'><td>91261</td><td>2.6</td><td>Apply algebraic methods in solving problems</td><td>4 credits</td><td>External</td></tr>
-	<tr class="click" onclick='document.location="91262.html"'><td>91262</td><td>2.7</td><td>Apply calculus methods in solving problems</td><td>5 credits</td><td>External</td></tr>
-	<tr class="click" onclick='document.location="91263.html"'><td>91263</td><td>2.8</td><td>Design a questionnaire</td><td>3 credits</td><td>Internal</td></tr>
-	<tr class="click bold" onclick='document.location="91264.html"'><td>91264</td><td>2.9</td><td>Use statistical methods to make an inference</td><td>4 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91265.html"'><td>91265</td><td>2.10</td><td>Conduct an experiment to investigate a situation using statistical methods</td><td>3 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91266.html"'><td>91266</td><td>2.11</td><td>Evaluate a statistically based report</td><td>2 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91267.html"'><td>91267</td><td>2.12</td><td>Apply probability methods in solving problems</td><td>4 credits</td><td>External</td></tr>
-	<tr class="click" onclick='document.location="91268.html"'><td>91268</td><td>2.13</td><td>Investigate a situation involving elements of chance using a simulation</td><td>2 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91269.html"'><td>91269</td><td>2.14</td><td>Apply systems of equations in solving problems</td><td>2 credits</td><td>Internal</td></tr>
+	<div class=border><div colspan=5><h1>Level 3</h1></div>
+	<div class="click" onclick='document.location="91573.html"'><div>91573</div><div>3.1</div><div>Apply the geometry of conic sections in solving problems</div><div>4 Credits</div><div>Internal</div></div>
+	<div class="click bold" onclick='document.location="91574.html"'><div>91574</div><div>3.2</div><div>Apply linear programming methods in solving problems</div><div>3 Credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91575.html"'><div>91575</div><div>3.3</div><div>Apply trigonometric methods in solving problems</div><div>3 Credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91576.html"'><div>91576</div><div>3.4</div><div>Use critical path analysis in solving problems</div><div>2 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91577.html"'><div>91577</div><div>3.5</div><div>Apply the algebra of complex numbers in solving problems</div><div>5 credits</div><div>External</div></div>
+	<div class="click" onclick='document.location="91578.html"'><div>91578</div><div>3.6</div><div>Apply differentiation methods in solving problems</div><div>6 credits</div><div>External</div></div>
+	<div class="click" onclick='document.location="91579.html"'><div>91579</div><div>3.7</div><div>Apply integration methods in solving problems</div><div>6 credits</div><div>External</div></div>
+	<div class="click bold" onclick='document.location="91580.html"'><div>91580</div><div>3.8</div><div>Investigate time series data</div><div>4 credits</div><div>Internal</div></div>
+	<div class="click bold" onclick='document.location="91581.html"'><div>91581</div><div>3.9</div><div>Investigate bivariate measurement data</div><div>4 credits</div><div>Internal</div></div>
+	<div class="click bold" onclick='document.location="91582.html"'><div>91582</div><div>3.10</div><div>Use statistical methods to make a formal inference</div><div>4 credits</div><div>Internal</div></div>
+	<div class="click bold" onclick='document.location="91583.html"'><div>91583</div><div>3.11</div><div>Conduct an experiment to investigate a situation using experimental design principles</div><div>4 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91584.html"'><div>91584</div><div>3.12</div><div>Evaluate statistically based reports</div><div>4 credits</div><div>External</div></div>
+	<div class="click" onclick='document.location="91585.html"'><div>91585</div><div>3.13</div><div>Apply probability concepts in solving problems</div><div>4 credits</div><div>External</div></div>
+	<div class="click bold" onclick='document.location="91586.html"'><div>91586</div><div>3.14</div><div>Apply probability distributions in solving problems</div><div>4 credits</div><div>External</div></div>
+	<div class="click bold" onclick='document.location="91587.html"'><div>91587</div><div>3.15</div><div>Apply systems of simultaneous equations in solving problems</div><div>3 credits</div><div>Internal</div></div>
 
-	<tr class=border><td colspan=5><h1>Level 1</h1></tr>
-	<tr class="click" onclick='document.location="91026.html"'><td>91026</td><td>1.1</td><td>Apply numeric reasoning in solving problems</td><td>4 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91027.html"'><td>91027</td><td>1.2</td><td>Apply algebraic procedures in solving problems</td><td>4 credits</td><td>External</td></tr>
-	<tr class="click" onclick='document.location="91028.html"'><td>91028</td><td>1.3</td><td>Investigate relationships between tables, equations and graphs</td><td>4 credits</td><td>External</td></tr>
-	<tr class="click" onclick='document.location="91029.html"'><td>91029</td><td>1.4</td><td>Apply linear algebra in solving problems</td><td>3 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91030.html"'><td>91030</td><td>1.5</td><td>Apply measurement in solving problems</td><td>3 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91031.html"'><td>91031</td><td>1.6</td><td>Apply geometric reasoning in solving problems</td><td>4 credits</td><td>External</td></tr>
-	<tr class="click" onclick='document.location="91032.html"'><td>91032</td><td>1.7</td><td>Apply right-angled triangles in solving measurement problems</td><td>3 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91033.html"'><td>91033</td><td>1.8</td><td>Apply knowledge of geometric representations in solving problems</td><td>3 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91034.html"'><td>91034</td><td>1.9</td><td>Apply transformation geometry in solving problems</td><td>2 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91035.html"'><td>91035</td><td>1.10</td><td>Investigate a given multivariate data set using the statistical enquiry cycle</td><td>4 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91036.html"'><td>91036</td><td>1.11</td><td>Investigate bivariate numerical data using the statistical enquiry cycle</td><td>3 credits</td><td>Internal</td></tr>
-	<tr class="click" onclick='document.location="91037.html"'><td>91037</td><td>1.12</td><td>Demonstrate understanding of chance and data</td><td>4 credits</td><td>External</td></tr>
-	<tr class="click" onclick='document.location="91038.html"'><td>91038</td><td>1.13</td><td>Investigate a situation involving elements of chance</td><td>3 credits</td><td>Internal</td></tr>
+	<div class=border><div colspan=5><h1>Level 2</h1></div>
+	<div class="click" onclick='document.location="91256.html"'><div>91256</div><div>2.1</div><div>Apply co-ordinate geometry methods in solving problems</div><div>2 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91257.html"'><div>91257</div><div>2.2</div><div>Apply graphical methods in solving problems</div><div>4 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91258.html"'><div>91258</div><div>2.3</div><div>Apply sequences and series in solving problems</div><div>2 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91259.html"'><div>91259</div><div>2.4</div><div>Apply trigonometric relationships in solving problems</div><div>3 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91260.html"'><div>91260</div><div>2.5</div><div>Apply network methods in solving problems</div><div>2 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91261.html"'><div>91261</div><div>2.6</div><div>Apply algebraic methods in solving problems</div><div>4 credits</div><div>External</div></div>
+	<div class="click" onclick='document.location="91262.html"'><div>91262</div><div>2.7</div><div>Apply calculus methods in solving problems</div><div>5 credits</div><div>External</div></div>
+	<div class="click" onclick='document.location="91263.html"'><div>91263</div><div>2.8</div><div>Design a questionnaire</div><div>3 credits</div><div>Internal</div></div>
+	<div class="click bold" onclick='document.location="91264.html"'><div>91264</div><div>2.9</div><div>Use statistical methods to make an inference</div><div>4 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91265.html"'><div>91265</div><div>2.10</div><div>Conduct an experiment to investigate a situation using statistical methods</div><div>3 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91266.html"'><div>91266</div><div>2.11</div><div>Evaluate a statistically based report</div><div>2 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91267.html"'><div>91267</div><div>2.12</div><div>Apply probability methods in solving problems</div><div>4 credits</div><div>External</div></div>
+	<div class="click" onclick='document.location="91268.html"'><div>91268</div><div>2.13</div><div>Investigate a situation involving elements of chance using a simulation</div><div>2 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91269.html"'><div>91269</div><div>2.14</div><div>Apply systems of equations in solving problems</div><div>2 credits</div><div>Internal</div></div>
+
+	<div class=border><div colspan=5><h1>Level 1</h1></div>
+	<div class="click" onclick='document.location="91026.html"'><div>91026</div><div>1.1</div><div>Apply numeric reasoning in solving problems</div><div>4 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91027.html"'><div>91027</div><div>1.2</div><div>Apply algebraic procedures in solving problems</div><div>4 credits</div><div>External</div></div>
+	<div class="click" onclick='document.location="91028.html"'><div>91028</div><div>1.3</div><div>Investigate relationships between tables, equations and graphs</div><div>4 credits</div><div>External</div></div>
+	<div class="click" onclick='document.location="91029.html"'><div>91029</div><div>1.4</div><div>Apply linear algebra in solving problems</div><div>3 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91030.html"'><div>91030</div><div>1.5</div><div>Apply measurement in solving problems</div><div>3 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91031.html"'><div>91031</div><div>1.6</div><div>Apply geometric reasoning in solving problems</div><div>4 credits</div><div>External</div></div>
+	<div class="click" onclick='document.location="91032.html"'><div>91032</div><div>1.7</div><div>Apply right-angled triangles in solving measurement problems</div><div>3 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91033.html"'><div>91033</div><div>1.8</div><div>Apply knowledge of geometric representations in solving problems</div><div>3 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91034.html"'><div>91034</div><div>1.9</div><div>Apply transformation geometry in solving problems</div><div>2 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91035.html"'><div>91035</div><div>1.10</div><div>Investigate a given multivariate data set using the statistical enquiry cycle</div><div>4 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91036.html"'><div>91036</div><div>1.11</div><div>Investigate bivariate numerical data using the statistical enquiry cycle</div><div>3 credits</div><div>Internal</div></div>
+	<div class="click" onclick='document.location="91037.html"'><div>91037</div><div>1.12</div><div>Demonstrate understanding of chance and data</div><div>4 credits</div><div>External</div></div>
+	<div class="click" onclick='document.location="91038.html"'><div>91038</div><div>1.13</div><div>Investigate a situation involving elements of chance</div><div>3 credits</div><div>Internal</div></div>
 		
-
-	</table>
 </div>
 <div id="sites"></div>
 <div id="header"></div>
