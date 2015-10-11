@@ -73,6 +73,7 @@ a:visited{
 #nav, #navreplace {
 	position:absolute;
 	bottom:15px;
+	left:0px;
 	right:0px;
 	text-align:center;
 	padding-left:15px;

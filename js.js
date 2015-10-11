@@ -16,10 +16,12 @@ function init() {
             $("#header img").css( "float", "left" );
             $("#nav").css( "text-align", "right" );
             $("#header img").css( "max-height", maxheight+"px" );
+            $("#nav").css( "left", "auto" );
 		} else {
             $("#header img").css( "float", "none" );
             $("#nav").css( "text-align", "center" );
             $("#header img").css( "max-height", imgheight+"px" );
+            $("#nav").css( "left", "0px" );
 		}
     });
 }
@@ -29,6 +31,8 @@ $(document).ready(function() {
 	$('head').append('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />');
 	$('head').append('<link rel="apple-touch-icon" href="http://www.mathsnz.com/icon.png">');
 	$('body').append('<img src="http://tracking.jake4maths.com/mathsnzimage.php?url='+window.location.href+'" style="position:absolute;left:-100px;top:-100px;">');
+	var y = $(window).scrollTop();
+	$(window).scrollTop(y+1);
  });
  
  
