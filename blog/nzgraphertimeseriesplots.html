@@ -7,13 +7,13 @@
 	<link href='../style.css' rel='stylesheet' type='text/css'>
 	<link rel="icon" href="http://www.mathsnz.com/favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="http://www.mathsnz.com/favicon.ico" type="image/x-icon"/>
-	<script> 
+	<script>
 	$(function(){
-	  $("#sites").load("../sites.html"); 
-	  $("#header").load("./header-blog.html"); 
-	  $("#footer").load("../footer.html"); 
+	  $("#sites").load("../sites.html");
+	  $("#header").load("./header-blog.html");
+	  $("#footer").load("../footer.html");
 	});
-	</script> 
+	</script>
 	<style>
 		#content img {
 			width:100%;
@@ -21,12 +21,14 @@
 			display:block;
 			margin-bottom:10px;
 		}
+		body{
+			background-color: #ddd;
+		}
 	</style>
 </head>
 <body>
-<div id=content>
-<img src='./nzgraphertimeseriesplots/1.png'>
-<img src='./nzgraphertimeseriesplots/2.png'>
+<div id=content style='position:fixed;top:120px;left:0px;right:0px;bottom:30px;max-width:100%;width:100%;'>
+	<iframe src="http://docs.google.com/viewer?url=http://www.mathsnz.com/blog/nzgraphertimeseriesplots/What is in the Black Box of the Time Series Module.pdf&embedded=true" style="width:100%; height:100%;" frameborder="0"></iframe>
 </div>
 <div id="sites"></div>
 <div id="header"></div>
