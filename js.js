@@ -27,14 +27,14 @@ function init() {
 }
 window.onload = init();
 $(document).ready(function() {
-	$(window).resize(function(){ $('#nav2').css("display", "none");}); 
-	$('head').append('<link rel="apple-touch-icon" href="http://www.mathsnz.com/icon.png">');
+	$(window).resize(function(){ $('#nav2').css("display", "none");});
+	$('head').append('<link rel="apple-touch-icon" href="https://www.mathsnz.com/icon.png">');
 	$('body').append('<img src="https://tracking.jake4maths.com/mathsnzimage.php?url='+window.location.href+'" style="position:absolute;left:-100px;top:-100px;">');
 	var y = $(window).scrollTop();
 	$(window).scrollTop(y+1);
  });
- 
- 
+
+
 //google analytics tracking
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
