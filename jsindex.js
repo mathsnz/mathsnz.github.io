@@ -1,4 +1,25 @@
 function init() {
+  var distanceY = window.pageYOffset || document.documentElement.scrollTop,
+  minsize = 30,
+  startingpoint = $('#logotable').height()+160;
+  leftright = startingpoint - 60;
+  $('body').css('padding-top',(startingpoint+25)+'px');
+  console.log(startingpoint);
+  size = startingpoint - distanceY,
+  imgheight = startingpoint - 30 - distanceY,
+  maxheight = startingpoint - 30 - leftright;
+  if (minsize > size) {
+      $("#header").css( "height", minsize+"px" );
+  } else {
+      $("#header").css( "height", size+"px" );
+  }
+  if (distanceY > leftright) {
+          $("#smalllogo").css( "display", "inline" );
+          $("#smalllogo").css( "float", "left" );
+          $("#smalllogo").css( "max-height", maxheight+"px" );
+  } else {
+          $("#smalllogo").css( "display", "none");
+  }
     window.onresize = function(event) {
       var distanceY = window.pageYOffset || document.documentElement.scrollTop,
       minsize = 30,
