@@ -2,12 +2,13 @@
 <head>
 	<title>MathsNZ Teachers</title>
 	<script src="./jquery.js"></script>
-	<script src="./js.js"></script>
+	<script src="./jsindex.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href='https://fonts.googleapis.com/css?family=Muli' rel='stylesheet' type='text/css'>
 	<link href='./style.css' rel='stylesheet' type='text/css'>
 	<link rel="icon" href="https://www.mathsnz.com/favicon.ico" type="image/x-icon"/>
 	<link rel="shortcut icon" href="https://www.mathsnz.com/favicon.ico" type="image/x-icon"/>
+	<meta name="description" content="MathsNZ is a website that supports teachers and students in NZ and other places with maths & stuff by providing heaps of resources, almost all of which are free.">
 	<script>
 	$(function(){
 	  $("#sites").load("sites.html");
@@ -15,42 +16,115 @@
 	  $("#footer").load("footer.html");
 	});
 	</script>
+	<style>
+		#nav {
+			text-align: right;
+    	left: auto;
+			top:15px;
+			right:0px;
+		}
+		#header {
+			height:400px;
+			max-height: 400px !important;
+		}
+		body{
+			padding-top: 425px;
+		}
+		#smalllogo{
+			display: none;
+		}
+		#header table {
+			position:absolute;
+			bottom:80px;
+			left:50%;
+			margin-left:-280px;
+			width:560px;
+			max-width: 100%;
+		}
+		#header table tr{
+			border:none;
+		}
+		#header table td{
+			color:#fff;
+			font-size:30px;
+			line-height: normal;
+		}
+		.big {
+			font-size:200%;
+			font-weight: bold;
+		}
+		#header table td img {
+			height:207px;
+			width:153px;
+			max-width: 306px;
+			max-height:410px;
+		}
+		.sections div {
+			width:32%;
+		}
+		@media all and (max-width: 660px) {
+			#header table td img {
+				height:104px;
+				width: 78px;
+			}
+			#header table td{
+				font-size: 15px;
+			}
+			#header table {
+				width:280px;
+				margin-left:-140px;
+			}
+			.sections div {
+				width:100%;
+			}
+		}
+	</style>
 </head>
 <body>
 <div id=content>
-I am a Maths teacher at a large school in New Zealand. This site has been set up in my own time to
-support maths teachers in NZ. The aim of the site is to provide resources and guides for teachers
-and students. All of these resources are provided free of charge...
-but <a href='./donate.html'>donations</a> are gladly accepted.<br>
-<br>You can also check us out on <a href='https://www.facebook.com/mathsnz' target='_blank'>facebook</a> to keep up
-to date with any new features or resources.<br>
-<br>
 <div class=sections>
 	<div>
 		<a href='./resources/'><img src='./img/mathsnzlogo.png' style='height:88px;'></a>
-		<a href='./'>MathsNZ</a> is the teacher focused size of this group of websites. Here you will find lots of
+		<a href='./'>MathsNZ</a> is the teacher focused size of this group of websites. Here you will find lots of free
 		<a href='./resources/'><b>resources</b></a> to help you in your teaching, including online tools, booklets that you can print off,
 		and various other different resources and ideas. <a href='./resources/'>See here</a> for a full list of the different
-		resources split up by standard / curriculum level.
+		resources.
+	</div>
+	<div>
+		<a href='https://students.mathsnz.com'><img src='./img/mathsnzstudentslogo.png' style='height:88px;'></a>
+		<a href='https://students.mathsnz.com'>MathsNZ Students</a> is a place for students to go to get free online lessons and related questions...
+		more resources are being added regularly but you should really check it out as there are lots of really good resources on there.
 	</div>
 	<div>
 		<a href='https://www.jake4maths.com/grapher/'><img src='./img/grapherlogob.png' style='height:88px;'></a>
 		<a href='https://www.jake4maths.com/grapher/'>NZGrapher</a> is a free graphing tool that can run on any device, without an install.
 		NZGrapher was developed to run on anything with a browser, computers, iPads,
-		ChromeBooks, Microsoft Surface, Android, even iPhones. <br>
-		Now available for download for PC and for hosting at your school... <a href='./nzgrapher.html'>more info here</a>.
-	</div>
-	<div>
-		<a href='https://students.mathsnz.com'><img src='./img/mathsnzstudentslogo.png' style='height:88px;'></a>
-		<a href='https://students.mathsnz.com'>MathsNZ Students</a> is a place for students to go to get online lessons and related questions...
-		still under development, and more resources are being added regularly.
+		ChromeBooks, Microsoft Surface, Android, even iPhones. <a href='./nzgrapher.html'>More info here</a>.
 	</div>
 	<div>
 		<a href='https://students.mathsnz.com/qg/'><img src='./img/mathsnzqglogo.png' style='height:88px;'></a>
 		<a href='https://students.mathsnz.com/qg/'>MathsNZ Question Generator</a> is a free tool to generate an endless stream of maths questions...
 		new question types are being added regularly, so if you have a good idea please let me know.
 	</div>
+	<div>
+		<a href='https://assay.co.nz/'><img src='./img/assaylogo.png' style='height:88px;'></a>
+		<a href='https://assay.co.nz/'>assay3</a> is a web based tool to analyse and graph student and school data...
+		this isn't free, but very reasonably priced... 	<a href='https://assay.co.nz/'>check it out</a>.
+	</div>
+	<div>
+		<a href='https://jakewills.github.io/'><div style='display:block;margin-left: auto;margin-right: auto;width:178px;'><img src='http://jakewills.github.io/jw.png' style='height:88px;display:inline-block'><img src='http://jakewills.github.io/avatar.png' style='height:88px;display:inline-block'></div></a>
+		I get up to a whole lot of other things... everything from photography to tweet walls and more.... you can <a href='https://jakewills.github.io/'>check out everything I do here</a>.
+	</div>
 </div>
+<br>
+<br>
+<b>About me:</b>
+I am a Maths teacher at a large school in New Zealand. This site has been set up in my own time to
+support maths teachers in NZ. The aim of the site is to provide resources and guides for teachers
+and students. Almost all of these resources are provided free of charge...
+but <a href='./donate.html'>donations</a> are gladly accepted. You can also check us out on
+<a href='https://www.facebook.com/mathsnz' target='_blank'>facebook</a> to keep up
+to date with any new features or resources.<br>
 <br>
 If you wish to be added to my email list when I create or change resources <a href='http://eepurl.com/4JD3v'>sign up here</a> or check us out on <a href='https://www.facebook.com/mathsnz' target='_blank'>facebook</a>.
 </div>
