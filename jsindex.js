@@ -4,9 +4,8 @@ function init() {
   startingpoint = $('#logotable').height()+160;
   leftright = startingpoint - 60;
   $('body').css('padding-top',(startingpoint+25)+'px');
-  console.log(startingpoint);
-  size = startingpoint - distanceY,
-  imgheight = startingpoint - 30 - distanceY,
+  size = startingpoint - distanceY;
+  imgheight = startingpoint - 30 - distanceY;
   maxheight = startingpoint - 30 - leftright;
   if (minsize > size) {
       $("#header").css( "height", minsize+"px" );
@@ -26,9 +25,8 @@ function init() {
       startingpoint = $('#logotable').height()+160;
       leftright = startingpoint - 60;
       $('body').css('padding-top',(startingpoint+25)+'px');
-      console.log(startingpoint);
-      size = startingpoint - distanceY,
-      imgheight = startingpoint - 30 - distanceY,
+      size = startingpoint - distanceY;
+      imgheight = startingpoint - 30 - distanceY;
       maxheight = startingpoint - 30 - leftright;
       if (minsize > size) {
           $("#header").css( "height", minsize+"px" );
@@ -50,9 +48,8 @@ function init() {
         startingpoint = $('#logotable').height()+160;
 			  leftright = startingpoint - 60;
         $('body').css('padding-top',(startingpoint+25)+'px');
-        console.log(startingpoint);
-			  size = startingpoint - distanceY,
-			  imgheight = startingpoint - 30 - distanceY,
+			  size = startingpoint - distanceY;
+			  imgheight = startingpoint - 30 - distanceY;
 			  maxheight = startingpoint - 30 - leftright;
         if (minsize > size) {
             $("#header").css( "height", minsize+"px" );
@@ -68,7 +65,7 @@ function init() {
     		}
     });
 }
-window.onload = init();
+
 $(document).ready(function() {
 	$(window).resize(function(){ $('#nav2').css("display", "none");});
 	$('head').append('<link rel="apple-touch-icon" href="https://www.mathsnz.com/icon.png">');
