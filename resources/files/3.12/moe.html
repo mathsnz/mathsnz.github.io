@@ -500,7 +500,7 @@
 			ctx.stroke();
 			ctx.lineWidth = 2;
 			i=0;
-			while(i<$('#g1ss').val()*val.c2){
+			while(i<$('#g2ss').val()*val.c2){
 				x = 55+Math.random()*(step*10*val.c2-10);
 				y = Math.random()*50+115;
 				ctx.beginPath();
@@ -525,7 +525,7 @@
 				ctx.stroke();
 				i++;
 			}
-			$('#1sqrtmoe').html((150/Math.sqrt($('#g1ss').val())).toPrecision(3)+"%");
+			$('#1sqrtmoe').html((75/Math.sqrt($('#g1ss').val())+75/Math.sqrt($('#g2ss').val())).toPrecision(3)+"%");
 			$('#95moe').html(((right-left)*50).toPrecision(3)+"%");
 		}
 		warn="";
