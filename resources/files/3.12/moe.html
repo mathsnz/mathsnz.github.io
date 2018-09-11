@@ -1,0 +1,574 @@
+<html>
+<head>
+	<title>Margin of Error Simulator</title>
+	<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style>
+		body, input, select, button {
+			font-family: 'Lato', 'Century Gothic', CenturyGothic, sans-serif;
+			font-size:16px;
+		}
+		#holder {
+			min-height:600px;
+			min-width:800px;
+			position:absolute;
+			top:0px;
+			left:0px;
+			right:0px;
+			bottom:0px;
+		}
+		#top {
+			position:absolute;
+			top:0px;
+			left:0px;
+			right:0px;
+			height:25px;
+			text-align:center;
+			padding:5px;
+			font-size:20px;
+			background-color:#0080FF;
+			color:#fff;
+			box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+			z-index:5;
+			font-weight:bold;
+		}
+		#left, #center, #right {
+			position:absolute;
+			top:35px;
+			bottom:0px;
+			padding:5px;
+		}
+		#left {
+			left:0px;
+			width:190px;
+			box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+			background-color:#fafafa;
+			z-index:4;
+		}
+		#center {
+			left:200px;
+			right:200px;
+			z-index:3;
+		} 
+		#right {
+			right:0px;
+			width:190px;
+			box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+			background-color:#fafafa;
+			z-index:4;
+		}
+		#canvas {
+			position:absolute;
+			top:5px;
+			left:5px;
+		}
+		select, input {
+			width:190px;
+		}
+		#sqrtwarn {
+			color:#f00;
+		}
+		button {
+			border:none;
+			background-color: #0080FF;
+			padding:5px;
+			color:#fff;
+			-webkit-appearance: none;
+			-webkit-border-radius: 0;
+		}
+		input, select {
+			border:1px solid #ccc;
+		}
+		input {
+			text-align:center;
+		}
+	</style>
+</head>
+<body>
+	<div id=holder>
+	<div id=top>
+		Margin of Error Simulator
+	</div>
+	<div id=left>
+		Type:<br>
+		<select id=type onchange='updatetitles()'>
+			<option value='no'>No Comparison</option>
+			<option value='1'>Comparison within one group</option>
+			<option value='2'>Comparison between two groups</option>
+		</select><br>
+		<br>
+		<span id=group1pp>Group 1 Population Proportion (as %):</span><br>
+		<input id=g1pp onchange='go()' onkeyup='go()' value=50><br>
+		<br>
+		<span id=group2ppshow>
+			<span id=group2pp>Group 1 Population Proportion (as %):</span><br>
+			<input id=g2pp onchange='go()' onkeyup='go()' value=50><br>
+			<br>
+		</span>
+		<span id=group1ss>Group 1 Sample Size:</span><br>
+		<input id=g1ss onchange='go()' onkeyup='go()' value=100><br>
+		<br>
+		<span id=group2ssshow>
+			<span id=group2ss>Group 2 Sample Size:</span><br>
+			<input id=g2ss onchange='go()' onkeyup='go()' value=100><br>
+			<br>
+		</span>
+		Simulation Speed:<br>
+		<input type="range" min="0" max="100" value="90" class="slider" id="speed" onchange='changespeed()'><br>
+		<br>
+		<span id=newsample><button onclick='nextpoint()'>New Sample</button></span>
+		<button onclick='go()'>Go Again</button>
+	</div>
+	<div id=center>
+		<canvas id="canvas" width="200" height="100"></canvas>
+	</div>
+	<div id=right>
+		95% confidence interval MoE:<br>
+		<b><span id='95moe'></span></b><br>
+		<br>
+		Rule of Thumb MoE:<br><img style='height:30px;position:relative;top:10px;' id=formula src='./moeformno.png'> =
+		<b><span id='1sqrtmoe'></span></b><br>
+		<b><span id='sqrtwarn'></span></b><br>
+		<br>
+	</div>
+	</div>
+</body>
+<script>
+	var done = 0;
+	points = [];
+	val=0;
+	function go(){
+		points = [];
+		done = 0;
+		nextpoint();
+	}
+	function updatetitles(){
+		if($('#type').val()=="no"){
+			$('#group1pp').html("Population Proportion (as %)");
+			$('#group1ss').html("Sample Size");
+			$('#g1pp').val('50');
+			$('#group2ppshow').hide();
+			$('#group2ssshow').hide();
+			$('#formula').attr('src','./moeformno.png');
+		}
+		if($('#type').val()=="1"){
+			$('#group1pp').html("Group 1 Population Proportion (as %)");
+			$('#group2pp').html("Group 2 Population Proportion (as %)");
+			$('#group1ss').html("Sample Size");
+			$('#g1pp').val('55');
+			$('#g2pp').val('35');
+			$('#group2ppshow').show();
+			$('#group2ssshow').hide();
+			$('#formula').attr('src','./moeform1.png');
+		}
+		if($('#type').val()=="2"){
+			$('#group1pp').html("Group 1 Population Proportion (as %)");
+			$('#group2pp').html("Group 2 Population Proportion (as %)");
+			$('#group1ss').html("Group 1 Sample Size");
+			$('#group2ss').html("Group 2 Sample Size");
+			$('#g1pp').val('55');
+			$('#g2pp').val('35');
+			$('#group2ppshow').show();
+			$('#group2ssshow').show();
+			$('#formula').attr('src','./moeform2.png');
+		}
+		go();
+	}
+	var timer;
+	function changespeed(){
+		if($('#speed').val()==0){
+			$('#newsample').show();
+		} else {
+			$('#newsample').hide();
+			nextpoint();
+		}
+	}
+	function nextpoint(){
+		if(done<1000){
+			next();
+			if($('#speed').val()==100){
+				timer = setTimeout(fastnextpoint, 100-$('#speed').val());
+			} else if($('#speed').val()==0){
+				plotpoints();
+			} else {
+				plotpoints();
+				timer = setTimeout(nextpoint, 100-$('#speed').val());
+			}
+		}
+	}
+	function fastnextpoint(){
+		while(done<1000){
+			next();
+		}
+		plotpoints();
+	
+	}
+	function next(){
+		if($('#type').val()=='no'){
+			pp = $('#g1pp').val();
+			ss = $('#g1ss').val();
+			i=0;
+			c=0;
+			while(i<ss){
+				if(Math.random()<=pp/100){c++;}
+				i++;
+			}
+			thisval=c/ss;
+			val = c/ss;
+		}
+		if($('#type').val()=='1'){
+			pp1 = $('#g1pp').val();
+			pp2 = $('#g2pp').val();
+			ss = $('#g1ss').val();
+			i=0;
+			c1=0;
+			c2=0;
+			while(i<ss){
+				r = Math.random()*100;
+				if(r<=pp1){
+					c1++;
+				} else if (r<(pp1-(-pp2))){
+					c2++;
+				}
+				i++;
+			}
+			c1 = c1/ss;
+			c2 = c2/ss;
+			thisval=c1-c2;
+			val = {c1,c2};
+		}
+		if($('#type').val()=='2'){
+			pp1 = $('#g1pp').val();
+			pp2 = $('#g2pp').val();
+			ss1 = $('#g1ss').val();
+			ss2 = $('#g2ss').val();
+			i=0;
+			c1=0;
+			c2=0;
+			while(i<ss1){
+				r = Math.random()*100;
+				if(r<=pp1){
+					c1++;
+				}
+				i++;
+			}
+			i=0;
+			while(i<ss2){
+				r = Math.random()*100;
+				if(r<=pp2){
+					c2++;
+				}
+				i++;
+			}
+			c1 = c1/ss1;
+			c2 = c2/ss2;
+			thisval=c1-c2;
+			val = {c1,c2};
+		}
+		points.push(thisval);
+		done++;
+	}
+	function plotpoints(){
+		var c = document.getElementById("canvas");
+		width = $('#center').width();
+		c.width = width;
+		height = $('#center').height();
+		c.height = height;
+		var ctx = c.getContext("2d");
+		ctx.clearRect(0, 0, c.width, c.height);
+		if($('#type').val()=="1"){
+			if(($('#g1pp').val()-(-$('#g2pp').val()))>100){
+				ctx.font = "16px Lato";
+				ctx.textAlign="center"; 
+				ctx.fillText("The two proportions must add to less than 100!", width/2, height/2); 
+				return;
+			}
+		}
+		ctx.moveTo(50, height-50);
+		ctx.lineTo(width-50, height-50);
+		ctx.stroke();
+		ctx.font = "14px Lato";
+		ctx.textAlign="center"; 
+		if($('#type').val()=="no"){
+			x=0;
+			highest=100;
+			shift=0;
+		}
+		if($('#type').val()=="1" || $('#type').val()=="2"){
+			x=-50;
+			highest=50;
+			shift=0.5;
+		}
+		left=50;
+		step = (width-100)/10
+		var counts = {};
+		for(var i=0;i< points.length;i++){
+		  var key = points[i];
+		  counts[key] = (counts[key])? counts[key] + 1 : 1 ;
+		}
+		max=0;
+		$.each(counts,function(index,value){
+			if(max<value){max=value;}
+		})
+		topshift = 0;
+		if($('#type').val()==2){topshift=70;}
+		hstep = (height-300-topshift)/max
+		if(hstep>10){hstep=10;}
+		
+		while(x<=highest){
+			ctx.fillText(x+"%", left, height-20);
+			ctx.beginPath();
+			ctx.moveTo(left, height-50);
+			ctx.lineTo(left, height-35);
+			ctx.stroke();
+			left+=step;
+			x+=10;
+		}
+		points.sort((a, b) => a - b);
+		lastvalue=-99;
+		c = points.length;
+		ctx.textAlign="left"; 
+		i=0;
+		left = "";
+		right = "b";
+		ctx.lineWidth = 2;
+		$.each(points,function(index, value){
+			i+=0.5;
+			if(i<c*0.025){
+				ctx.fillStyle="#aaa";
+				ctx.strokeStyle="#aaa";
+			} else if (i<=c*0.975){
+				if(left==""){left=value;}
+				ctx.fillStyle="#000";
+				ctx.strokeStyle="#000";
+				right = value;
+			} else {
+				ctx.fillStyle="#aaa";
+				ctx.strokeStyle="#aaa";
+			}			
+			if(lastvalue==value){
+				h-=hstep;
+			} else {
+				h=height-80;
+			}
+			lastvalue=value;
+			ctx.beginPath();
+			ctx.arc(50+step*10*(value+shift), h, 5, 0, 2 * Math.PI);
+			ctx.stroke();
+			i+=0.5;
+		})
+		ctx.lineWidth = 20;
+		ctx.strokeStyle = '#00f';
+		ctx.beginPath();
+		ctx.moveTo(50+step*10*(left+shift), height-63);
+		ctx.lineTo(50+step*10*(right+shift), height-63);
+		ctx.stroke();
+		ctx.fillStyle="#00f";
+		ctx.textAlign="right";
+		ctx.fillText((left*100).toPrecision(3)+"%", 50+step*10*(left+shift), height-58); 
+		ctx.textAlign="left";
+		ctx.fillText((right*100).toPrecision(3)+"%", 50+step*10*(right+shift), height-58); 
+		ctx.textAlign="center";
+		ctx.fillStyle = 'rgba(0,0,0,1)';
+		if($('#type').val()=="no"){
+			ctx.lineWidth = 60;
+			ctx.strokeStyle = 'rgba(27,158,119,0.5)';
+			ctx.beginPath();
+			ctx.moveTo(50, 70);
+			ctx.lineTo(50+step*10*val, 70);
+			ctx.stroke();
+			ctx.lineWidth = 2;
+			i=0;
+			while(i<$('#g1ss').val()*val){
+				x = 55+Math.random()*(step*10*val-10);
+				y = Math.random()*50+45;
+				ctx.beginPath();
+				ctx.arc(x, y, 5, 0, 2 * Math.PI);
+				ctx.stroke();
+				i++;
+			}
+			ctx.fillText((val*100).toPrecision(3)+"%", 50+step*10*(val/2), 75);
+			ctx.strokeStyle = 'rgba(217,95,2,0.5)';
+			ctx.lineWidth = 60;
+			ctx.beginPath();
+			ctx.moveTo(50+step*10*val, 70);
+			ctx.lineTo(width-50, 70);
+			ctx.stroke();
+			ctx.lineWidth = 2;
+			while(i<$('#g1ss').val()){
+				x = 55+step*10*val+Math.random()*(width-step*10*val-110);
+				y = Math.random()*50+45;
+				ctx.beginPath();
+				ctx.arc(x, y, 5, 0, 2 * Math.PI);
+				ctx.stroke();
+				i++;
+			}
+			$('#1sqrtmoe').html((100/Math.sqrt($('#g1ss').val())).toPrecision(3)+"%");
+			$('#95moe').html(((right-left)*50).toPrecision(3)+"%");
+		}
+		if($('#type').val()=="1"){
+			ctx.lineWidth = 60;
+			ctx.strokeStyle = 'rgba(27,158,119,0.5)';
+			ctx.beginPath();
+			ctx.moveTo(50, 70);
+			ctx.lineTo(50+step*10*val.c1, 70);
+			ctx.stroke();
+			ctx.lineWidth = 2;
+			i=0;
+			while(i<$('#g1ss').val()*val.c1){
+				x = 55+Math.random()*(step*10*val.c1-10);
+				y = Math.random()*50+45;
+				ctx.beginPath();
+				ctx.arc(x, y, 5, 0, 2 * Math.PI);
+				ctx.stroke();
+				i++;
+			}
+			ctx.fillText("Group 1 ("+(val.c1*100).toPrecision(3)+"%)", 50+step*10*(val.c1/2), 75);
+			ctx.strokeStyle = 'rgba(117,112,179,0.5)';
+			ctx.lineWidth = 60;
+			ctx.beginPath();
+			ctx.moveTo(50+step*10*val.c1, 70);
+			ctx.lineTo(50+step*10*(val.c1+val.c2), 70);
+			ctx.stroke();
+			ctx.lineWidth = 2;
+			while(i<$('#g1ss').val()*(val.c1+val.c2)){
+				x = 55+step*10*val.c1+Math.random()*(step*10*val.c2-10);
+				y = Math.random()*50+45;
+				ctx.beginPath();
+				ctx.arc(x, y, 5, 0, 2 * Math.PI);
+				ctx.stroke();
+				i++;
+			}
+			ctx.fillText("Group 2 ("+(val.c2*100).toPrecision(3)+"%)", 50+step*10*(val.c1+val.c2/2), 75);
+			ctx.strokeStyle = 'rgba(217,95,2,0.5)';
+			ctx.lineWidth = 60;
+			ctx.beginPath();
+			ctx.moveTo(50+step*10*(val.c1+val.c2), 70);
+			ctx.lineTo(width-50, 70);
+			ctx.stroke();
+			ctx.lineWidth = 2;
+			while(i<$('#g1ss').val()){
+				x = 55+step*10*(val.c1+val.c2)+Math.random()*(width-step*10*(val.c1+val.c2)-110);
+				y = Math.random()*50+45;
+				ctx.beginPath();
+				ctx.arc(x, y, 5, 0, 2 * Math.PI);
+				ctx.stroke();
+				i++;
+			}
+			$('#1sqrtmoe').html((200/Math.sqrt($('#g1ss').val())).toPrecision(3)+"%");
+			$('#95moe').html(((right-left)*50).toPrecision(3)+"%");
+		}
+		if($('#type').val()=="2"){
+			ctx.lineWidth = 60;
+			ctx.strokeStyle = 'rgba(27,158,119,0.5)';
+			ctx.beginPath();
+			ctx.moveTo(50, 70);
+			ctx.lineTo(50+step*10*val.c1, 70);
+			ctx.stroke();
+			ctx.lineWidth = 2;
+			i=0;
+			while(i<$('#g1ss').val()*val.c1){
+				x = 55+Math.random()*(step*10*val.c1-10);
+				y = Math.random()*50+45;
+				ctx.beginPath();
+				ctx.arc(x, y, 5, 0, 2 * Math.PI);
+				ctx.stroke();
+				i++;
+			}
+			ctx.fillText("Grp1", 20, 75);
+			ctx.fillText((val.c1*100).toPrecision(3)+"%", 50+step*10*(val.c1/2), 75);
+			ctx.strokeStyle = 'rgba(217,95,2,0.5)';
+			ctx.lineWidth = 60;
+			ctx.beginPath();
+			ctx.moveTo(50+step*10*(val.c1), 70);
+			ctx.lineTo(width-50, 70);
+			ctx.stroke();
+			ctx.lineWidth = 2;
+			while(i<$('#g1ss').val()){
+				x = 55+step*10*(val.c1)+Math.random()*(width-step*10*(val.c1)-110);
+				y = Math.random()*50+45;
+				ctx.beginPath();
+				ctx.arc(x, y, 5, 0, 2 * Math.PI);
+				ctx.stroke();
+				i++;
+			}
+			ctx.lineWidth = 60;
+			ctx.strokeStyle = 'rgba(117,112,179,0.5)';
+			ctx.beginPath();
+			ctx.moveTo(50, 140);
+			ctx.lineTo(50+step*10*val.c2, 140);
+			ctx.stroke();
+			ctx.lineWidth = 2;
+			i=0;
+			while(i<$('#g1ss').val()*val.c2){
+				x = 55+Math.random()*(step*10*val.c2-10);
+				y = Math.random()*50+115;
+				ctx.beginPath();
+				ctx.arc(x, y, 5, 0, 2 * Math.PI);
+				ctx.stroke();
+				i++;
+			}
+			ctx.fillText((val.c2*100).toPrecision(3)+"%", 50+step*10*(val.c2/2), 145);
+			ctx.fillText("Grp2", 20, 145);
+			ctx.strokeStyle = 'rgba(231,41,138,0.5)';
+			ctx.lineWidth = 60;
+			ctx.beginPath();
+			ctx.moveTo(50+step*10*(val.c2), 140);
+			ctx.lineTo(width-50, 140);
+			ctx.stroke();
+			ctx.lineWidth = 2;
+			while(i<$('#g2ss').val()){
+				x = 55+step*10*(val.c2)+Math.random()*(width-step*10*(val.c2)-110);
+				y = Math.random()*50+115;
+				ctx.beginPath();
+				ctx.arc(x, y, 5, 0, 2 * Math.PI);
+				ctx.stroke();
+				i++;
+			}
+			$('#1sqrtmoe').html((150/Math.sqrt($('#g1ss').val())).toPrecision(3)+"%");
+			$('#95moe').html(((right-left)*50).toPrecision(3)+"%");
+		}
+		warn="";
+		if($('#type').val()=="no"){
+			if($('#g1pp').val()<30){warn="Proportion less than 30%";}
+			if($('#g1pp').val()>70){warn="Proportion more than 70%";}
+		}
+		if($('#type').val()=="1" || $('#type').val()=="2"){
+			if($('#g1pp').val()<30){warn+="Group 1 proportion less than 30% ";}
+			if($('#g1pp').val()>70){warn+="Group 1 proportion more than 70% ";}
+			if($('#g2pp').val()<30){warn+="Group 2 proportion less than 30% ";}
+			if($('#g2pp').val()>70){warn+="Group 2 proportion more than 70% ";}
+		}
+		$('#sqrtwarn').html(warn);
+		ctx.strokeStyle = '#000';
+		ctx.fillStyle = '#000';
+		ctx.textAlign="center"; 
+		ctx.lineWidth = 1;
+		x=0;
+		left=50;
+		ctx.beginPath();
+		ctx.moveTo(50, 120+topshift);
+		ctx.lineTo(width-50, 120+topshift);
+		ctx.stroke();
+		while(x<=100){
+			ctx.fillText(x+"%", left, 150+topshift);
+			ctx.beginPath();
+			ctx.moveTo(left, 120+topshift);
+			ctx.lineTo(left, 135+topshift);
+			ctx.stroke();
+			left+=step;
+			x+=10;
+		}
+		ctx.fillStyle="#000";
+		ctx.font = "bold 18px Lato";
+		ctx.textAlign="left";
+		ctx.fillText("Most Recent Sample:", 30, 30); 
+		ctx.fillText("Distrubtion of Samples:", 30, 180+topshift); 
+		ctx.font = "14px Lato";
+		ctx.fillText("Samples: "+c, 50, 200+topshift);
+	}
+	updatetitles();
+	changespeed();
+	//show percentages on most recent sample bar
+</script>
+</html>
